@@ -1,16 +1,9 @@
-# RVM settings
-if [[ -s ~/.rvm/scripts/rvm ]] ; then 
-  RPS1="%{$fg[yellow]%}rvm:%{$reset_color%}%{$fg[red]%}\$(~/.rvm/bin/rvm-prompt)%{$reset_color%} $EPS1"
-else
-  if which rbenv &> /dev/null; then
-    RPS1="%{$fg[yellow]%}rbenv:%{$reset_color%}%{$fg[red]%}\$(rbenv version | sed -e 's/ (set.*$//')%{$reset_color%} $EPS1"
-  fi
-fi
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}["
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}git:["
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
+RPS1='$(git_prompt_info)'
 
-PROMPT='%{$fg[cyan]%}[%~% ]%{$reset_color%}$(git_prompt_info)%{$fg[red]%}%(?..[%?])%{$reset_color%}%B$%b '
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+PROMPT='${ret_status} %{$fg[cyan]%}%B[%~% ]%b%(?..%{$fg[red]%}%B[%?]%b)%{$reset_color%} '
